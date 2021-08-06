@@ -1,1 +1,17 @@
 Not done yet!
+
+
+var style = document.documentElement;
+// console.log( style.getPropertyValue('--purpleH') )
+// console.log(document.cookie)
+purpleT=style.getPropertyValue('--TEST');
+console.log(purpleT);
+if (document.cookie==null) {
+  document.cookie="purpleT="+purpleT;
+
+}
+//var purpleH = document.cookie;
+style.setProperty('--TEST',"#ffffff")
+purpleT=style.getPropertyValue('--TEST');
+
+

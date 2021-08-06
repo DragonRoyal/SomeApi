@@ -1,3 +1,69 @@
+//var purpleH = window.getComputedStyle(document.documentElement.getPropertyValue("--purpleH"));
+
+// setter
+
+//document.documentElement.style.setProperty('--purpleH', 'blue');
+// getter
+//a=getComputedStyle(document.documentElement,null).getPropertyValue('--purpleH');
+//document.cookie="#1abc9c";
+if (document.cookie==null) {
+  document.cookie="#5557D9 #4449d6 #222c68 #4449d6 #6b7edb white #101D42; max-age=157680000; path=/";
+}
+var str=document.cookie;
+color_cookie=str.split(" ");
+//var purpleH_cookie = document.cookie;
+document.documentElement.style.setProperty('--purpleH',color_cookie[0]);
+document.documentElement.style.setProperty('--MHP',color_cookie[1]);
+document.documentElement.style.setProperty('--MBP',color_cookie[2]);
+document.documentElement.style.setProperty('--INP',color_cookie[3]);
+document.documentElement.style.setProperty('--scrollbar',color_cookie[4]);
+document.documentElement.style.setProperty('--boxtext',color_cookie[5]);
+document.documentElement.style.setProperty('--bodyC',color_cookie[6]);
+
+
+
+
+//a=getComputedStyle(document.documentElement,null).getPropertyValue('--purpleH');
+//console.log(a);
+
+function themeFUNCP() {
+document.cookie="#5557D9 #4449d6 #222c68 #4449d6 #6b7edb white #101D42; max-age=157680000; path=/";
+var str=document.cookie;
+color_cookie=str.split(" ");
+//var purpleH_cookie = document.cookie;
+document.documentElement.style.setProperty('--purpleH',color_cookie[0]);
+document.documentElement.style.setProperty('--MHP',color_cookie[1]);
+document.documentElement.style.setProperty('--MBP',color_cookie[2]);
+document.documentElement.style.setProperty('--INP',color_cookie[3]);
+document.documentElement.style.setProperty('--scrollbar',color_cookie[4]);
+document.documentElement.style.setProperty('--boxtext',color_cookie[5]);
+document.documentElement.style.setProperty('--bodyC',color_cookie[6]);
+
+
+}
+
+
+function themeFUNCA() {
+document.cookie="#1abc9c #1abc9c white #3CBC8D #17ed90 black #1D1E28; max-age=157680000; path=/";
+var str=document.cookie;
+color_cookie=str.split(" ");
+//var purpleH_cookie = document.cookie;
+document.documentElement.style.setProperty('--purpleH',color_cookie[0]);
+document.documentElement.style.setProperty('--MHP',color_cookie[1]);
+document.documentElement.style.setProperty('--MBP',color_cookie[2]);
+document.documentElement.style.setProperty('--INP',color_cookie[3]);
+document.documentElement.style.setProperty('--scrollbar',color_cookie[4]);
+document.documentElement.style.setProperty('--boxtext',color_cookie[5]);
+document.documentElement.style.setProperty('--bodyC',color_cookie[6]);
+
+
+
+
+
+}
+
+
+
 /* ---- particles.js config ---- */
 
 particlesJS("particles-js", {
@@ -341,3 +407,8 @@ function fauxClick(x, y) {
   fauxClick.pageY = y;
   document.dispatchEvent(fauxClick);
 }
+
+
+//document.documentElement.style.setProperty("--purpleH", "#5557D9");
+
+

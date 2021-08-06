@@ -1,5 +1,14 @@
+:root {
+  --purpleH: #5557D9;
+  --MHP:#4449d6;
+  --MBP:#222c68;
+  --INP:#4449d6;
+  --scrollbar: #6b7edb;
+  --boxtext: white;
+  --bodyC:#101D42;
+}
 #boxtext{
-  color: white
+  color: var(--boxtext)
 }
 
 
@@ -115,7 +124,8 @@ flex: 2 0px;
 	top:1px;
 }
 body {
-	background-color: #101D42;
+
+	background-color: var(--bodyC);
   
 }
 .light-mode{
@@ -187,17 +197,15 @@ p {
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-	background: #6b7edb; 
+
+	background: var(--scrollbar); 
 	border-radius: 1px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     
-	background: #4449d6; 
-  }
-  ::-webkit-scrollbar-thumb:active {
-	background: red; 
+	background: var(--scrollbar); 
   }
 
   i.fa {
@@ -443,7 +451,7 @@ pbutton:active {
 	 transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
  button.learn-more:hover {
-	 background: #17ed90;
+	 background: #6564db;
 	 transform: translate(0, 0.25em);
 }
  button.learn-more:hover::before {
@@ -451,7 +459,7 @@ pbutton:active {
 	 transform: translate3d(0, 0.5em, -1em);
 }
  button.learn-more:active {
-	 background: #17ed90;
+	 background: #3b3ad1;
 	 transform: translate(0em, 0.75em);
 }
  button.learn-more:active::before {
@@ -494,7 +502,7 @@ pbutton:active {
 .header {
   padding: 40px;
   text-align: center;
-  background: #5557D9;
+  background:var(--purpleH);
   color: whitesmoke;
   font-size: 30px;
   margin:-8px;
@@ -525,9 +533,9 @@ pbutton:active {
 .message-header {
   	text-align: center;
     align-items: center;
-    background-color: #192555;
+    /* background-color: #192555; */
     border-radius: 10px 10px 0 0;
-    background-color: #4449d6;
+    background-color: var(--MHP);
     color: black;
     
     display: flex;
@@ -539,8 +547,8 @@ pbutton:active {
     position: relative;
 }       
 .message-body {
-    background-color: #222c68;
-    border-color:#222c68;
+    background-color:var(--MBP);
+    border-color:var(--MBP);
     border-radius: 4px;
     border-style: solid;
     border-width: 0 0 0 4px;
@@ -602,7 +610,7 @@ input[type=text] {
   margin: 8px 0;
   box-sizing: border-box;
   border: 3px solid black;
-  background-color: #3CBC8D;
+  background-color: var(--INP);
   color: black;
 }
 ::placeholder {

@@ -8,6 +8,22 @@
         "index": 1206
       }
     ],
+    "api-things/qoutes.json": [
+      {
+        "id": "2d730f07-cc6e-4fb3-b58c-7cd4425c0971",
+        "line": 209,
+        "version": 1,
+        "index": 13082
+      }
+    ],
+    "static/script.js": [
+      {
+        "id": "24c64818-09cf-469b-ba03-9b5f59eeeb72",
+        "line": 409,
+        "version": 1089,
+        "index": 10245
+      }
+    ],
     "static/website.js": [
       {
         "id": "fd4f6129-c220-4206-bdac-bea485e60b50",
