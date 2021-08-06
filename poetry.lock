@@ -139,6 +139,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "oauth"
+version = "1.0.1"
+description = "Library for OAuth version 1.0a."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "priority"
 version = "2.0.0"
 description = "A pure-Python implementation of the HTTP/2 priority tree"
@@ -200,7 +208,7 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "b89dece9fe721b3c02e3bcf9fd5d41724c293bb77fad876aff77a8377401c578"
+content-hash = "0066a2c04bae3c2c3ea2e65fdef624e173e0fcfa218f3acaada6f98970e20c85"
 
 [metadata.files]
 aiofiles = [
@@ -285,6 +293,9 @@ markupsafe = [
     {file = "MarkupSafe-2.0.1-cp39-cp39-win32.whl", hash = "sha256:10f82115e21dc0dfec9ab5c0223652f7197feb168c940f3ef61563fc2d6beb74"},
     {file = "MarkupSafe-2.0.1-cp39-cp39-win_amd64.whl", hash = "sha256:693ce3f9e70a6cf7d2fb9e6c9d8b204b6b39897a2c4a1aa65728d5ac97dcc1d8"},
     {file = "MarkupSafe-2.0.1.tar.gz", hash = "sha256:594c67807fb16238b30c44bdf74f36c02cdf22d1c8cda91ef8a0ed8dabf5620a"},
+]
+oauth = [
+    {file = "oauth-1.0.1.tar.gz", hash = "sha256:e769819ff0b0c043d020246ce1defcaadd65b9c21d244468a45a7f06cb88af5d"},
 ]
 priority = [
     {file = "priority-2.0.0-py3-none-any.whl", hash = "sha256:6f8eefce5f3ad59baf2c080a664037bb4725cd0a790d53d59ab4059288faf6aa"},

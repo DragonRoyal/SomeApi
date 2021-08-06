@@ -1,10 +1,13 @@
 from PIL import Image,ImageOps,ImageFont,ImageDraw
+from oauth import Oauth
 import quart
 import textwrap
 from random import *
 import requests
-
+import secrets
 import json
+import urllib.parse as urlparse
+from urllib.parse import parse_qs
 from io import BytesIO
 from quart import *
 from defstuff import *
@@ -20,7 +23,8 @@ with open("api-things/qoutes.json") as json_file:
     data = json.load(json_file)
     dataLength = len(data)
 
-
+gen_key=secrets.token_hex(20)
+print("gen_key=",gen_key)
 
 @app.route("/")
 async def main():
@@ -44,6 +48,21 @@ async def otters_img():
   return await send_file(f"/image/otter/{seal}.jpg", mimetype='image/jpg')
 
 
+@app.route("/register")
+async def api_key_register():
+  pass
+@app.route("/register/discord",methods=['get'])
+async def discord_url():
+  discord_url_link='https://discord.com/api/oauth2/authorize?client_id=873068029024534538&redirect_uri=https%3A%2F%2Fsomeapi.xyz%2Fregister%2Fdiscord&response_type=code&scope=email%20identify%20guilds'
+
+  url = "https://discord.com/api/users/@me"
+  access_token = Oauth.get_access_token(str(quart.request.args['code']))
+  
+  headers = {"Authorization": f"Bearer {access_token}"}
+ 
+  user_object = requests.get(url = url, headers = headers).json()
+  print("user objetc",user_object)
+  return user_object
 
 
 
