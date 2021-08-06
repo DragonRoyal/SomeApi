@@ -1,5 +1,6 @@
 from PIL import Image,ImageOps,ImageFont,ImageDraw
 from oauth import Oauth
+import csv
 import quart
 import textwrap
 from random import *
@@ -18,13 +19,13 @@ async def Schema():
 async def valueError():
   return await render_template("valueError.html")
 
-   
+
 with open("api-things/qoutes.json") as json_file:
     data = json.load(json_file)
     dataLength = len(data)
 
-gen_key=secrets.token_hex(20)
-print("gen_key=",gen_key)
+
+
 
 @app.route("/")
 async def main():
@@ -59,10 +60,26 @@ async def discord_url():
   access_token = Oauth.get_access_token(str(quart.request.args['code']))
   
   headers = {"Authorization": f"Bearer {access_token}"}
- 
+  gen_key=secrets.token_hex(20)
   user_object = requests.get(url = url, headers = headers).json()
   print("user objetc",user_object)
-  return user_object
+  userid=user_object["id"]
+  with open('apikey.csv', mode='r') as keyfile:
+    csv_reader = csv.reader(keyfile, delimiter=',')
+    userid_exists = 0
+    for row in csv_reader:
+      if row[0]==userid:
+        print(f"user id:{userid} already exists ")
+        userid_exists=1
+        return "Only 1 api key per User, You already have one"
+        #break
+        
+  if userid_exists==0:
+    with open('apikey.csv', mode='a') as keyfile:
+      key_writer = csv.writer(keyfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+      key_writer.writerow([userid, gen_key,])
+    
+  return f"sucessful your api key is {genkey}"
 
 
 
