@@ -4,9 +4,11 @@ import csv
 import quart
 import textwrap
 from random import *
+import smtplib,ssl
 import requests
 import secrets
 import json
+import aiohttp
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
 from io import BytesIO
@@ -18,14 +20,6 @@ async def Schema():
   return "a"
 async def valueError():
   return await render_template("valueError.html")
-
-
-with open("api-things/qoutes.json") as json_file:
-    data = json.load(json_file)
-    dataLength = len(data)
-
-
-
 
 @app.route("/")
 async def main():
@@ -42,11 +36,16 @@ async def themes():
   return await render_template("theme.html")
 
 
-@app.route("/otter/image",)
+@app.route("/image/otter",)
 async def otters_img():
-  imgList = os.listdir("/image/otter")
+  imgList = os.listdir("otter")
   seal = random.choice(imgList)
-  return await send_file(f"/image/otter/{seal}.jpg", mimetype='image/jpg')
+  return await send_file(f"otter/{seal}", mimetype='image/jpg')
+@app.route("/image/dog",)
+async def dog_img():
+  imgList = os.listdir("dogs")
+  seal = random.choice(imgList)
+  return await send_file(f"dogs/{seal}", mimetype='image/png')
 
 
 @app.route("/register")
@@ -64,6 +63,7 @@ async def discord_url():
   user_object = requests.get(url = url, headers = headers).json()
   print("user objetc",user_object)
   userid=user_object["id"]
+  email=user_object["email"]
   with open('apikey.csv', mode='r') as keyfile:
     csv_reader = csv.reader(keyfile, delimiter=',')
     userid_exists = 0
@@ -78,8 +78,8 @@ async def discord_url():
     with open('apikey.csv', mode='a') as keyfile:
       key_writer = csv.writer(keyfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
       key_writer.writerow([userid, gen_key,])
-    
-  return f"sucessful your api key is {genkey}"
+  await send_email(email,gen_key)
+  return f"sucessful your api key is {gen_key}, a email with your api key will also be sent shortly..."
 
 
 
@@ -91,7 +91,7 @@ async def Dfact():
     return quart.jsonify(Rdata)
 
 
-@app.route('/json/qoute', methods=['GET'])
+@app.route('/json/quote', methods=['GET'])
 async def qoutes():     
     with open("api-things/qoutes.json") as json_file:
       data = json.load(json_file)
@@ -146,6 +146,24 @@ async def trash():
         trash.paste(pfp,(140,145),pfp.convert("RGBA"))
         trash.save("trash_photo/trashpic.png")
         return await send_file("trash_photo/trashpic.png", mimetype='image/png')
+ 
+
+      else:
+        return await page_not_found(404)
+
+@app.route('/hitler',methods=['GET'])
+async def hiter():
+      if 'avatar' in quart.request.args:
+        Lavatar = str(quart.request.args['avatar'])
+        response = requests.get(Lavatar)
+        image = Image.open(BytesIO(response.content))
+        image.save("avatar.png")
+        pfp=Image.open("avatar.png")
+        pfp=pfp.resize((160,160))
+        trash=Image.open("image/hitler.png")
+        trash.paste(pfp,(29,32),pfp.convert("RGBA"))
+        trash.save("trash_photo/hitlerpic.png")
+        return await send_file("trash_photo/hitlerpic.png", mimetype='image/png')
  
 
       else:
@@ -280,6 +298,30 @@ async def biden():
     else:
       return await page_not_found(404)
 
+@app.route('/premuim/chatbot')
+async def chatbot():
+  api_key=str(quart.request.args['code'])
+  with open('apikey.csv', mode='r') as keyfile:
+    csv_reader = csv.reader(keyfile, delimiter=',')
+    apikey_exists = 0
+    for row in csv_reader:
+      if row[1]==api_key:
+        apikey_exists=1
+        break
+
+  if apikey_exists==1:
+    if 'text' in quart.request.args:
+      text = str(quart.request.args['text'])
+      async with aiohttp.ClientSession() as cs:
+        async with cs.get(f'http://api.brainshop.ai/get?bid=158326&key=wcISHu2N1pgIf5Kh&uid=[uid]&msg={text}') as r:
+          data = await r.json()
+          return quart.jsonify(text=data["cnt"])
+  else:
+    return "Invalid Api Key! Go get one!"
+            
+          
+        
+
 
 
 @app.route('/pacman/text',methods=['GET'])
@@ -400,7 +442,22 @@ async def rainbow_overlay():
 async def page_not_found(e):
     return await render_template("404.html")
 
-#@app.errorhandler()
+async def send_email(reciver,apikey):
+  port = 465  # For SSL
+  smtp_server = "smtp.gmail.com"
+  sender_email = "aarav.singhania50@gmail.com"  # Enter your address
+  receiver_email = reciver  # Enter receiver address
+  
+  message = f"""\
+  Subject: SomeApi Key
+
+  Hello! Thanks for signing up with SomeApi!
+  Your Api Key is {apikey}."""
+
+  context = ssl.create_default_context()
+  with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+      server.login(sender_email, "savecup11")
+      server.sendmail(sender_email, receiver_email, message)
 
 
 @app.route('/doc')
@@ -417,6 +474,9 @@ async def policythings():
 @app.route('/credits')
 async def creduts():
     return await render_template("credits.html")
+
+
+
 
 
  

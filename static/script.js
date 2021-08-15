@@ -409,6 +409,3 @@ function fauxClick(x, y) {
 }
 
 
-//document.documentElement.style.setProperty("--purpleH", "#5557D9");
-
-

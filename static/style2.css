@@ -1,0 +1,136 @@
+html, body {
+  font-family: Lato, sans-serif;
+  background: #000 url(https://res.cloudinary.com/dx2djhp6g/image/upload/v1543858078/patrick-fore-562330-unsplash.jpg) no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: calc(4px + (16 - 4) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.hide {
+  display: none;
+}
+
+.container .intro-text.show {
+  visibility: visible;
+  display: inlne-block;
+  font-size: 6em;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: aboslute;
+}
+.container .planet {
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+.container .planet circle {
+  stroke: black;
+  stroke-width: 1px;
+}
+.container .planet polygon {
+  stroke: black;
+  stroke-width: 1px;
+}
+.container .planet {
+  cursor: pointer;
+  -webkit-filter: drop-shadow(0 0 0.75rem green);
+  filter: drop-shadow(0 0 0.75rem green);
+  transition: transform 0.2s ease-out 0s;
+}
+.container .planet svg circle {
+  fill: #FECEB7;
+}
+.container .planet svg polygon {
+  fill: #A77370;
+}
+.container .fade_planet {
+  animation: planet 11s ease-out;
+}
+.container .intro-text {
+  visibility: hidden;
+  position: absolute;
+  display: inline-block;
+  font-size: 6em;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: cyan;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 0.04em;
+  -webkit-text-stroke-color: #2e92f4;
+  letter-spacing: 0.1em;
+}
+.container .intro-text p {
+  text-align: center;
+  margin: 0 0;
+}
+.container .intro-text.animate-intro {
+  animation: intro 8s ease-in;
+}
+.container .intro-text.superman {
+  font-size: 8em;
+}
+.container .intro-text.superman.animate-intro {
+  animation: intro-sup 8s ease-in;
+}
+
+@keyframes intro {
+  0% {
+    visibility: visible;
+    font-size: 1em;
+    transform: translateX(0%);
+    text-shadow: none;
+  }
+  50% {
+    font-size: 6em;
+    transform: translate(0%, 0%);
+    text-shadow: none;
+  }
+  90% {
+    transform: translateX(-4em);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-8em);
+    text-shadow: #8fc5f9 1px 1px, #8fc5f9 2px 2px, #8fc5f9 3px 3px, #8fc5f9 4px 4px, #8fc5f9 5px 5px, #8fc5f9 6px 6px, #8fc5f9 7px 7px, #8fc5f9 8px 8px, #8fc5f9 9px 9px, #8fc5f9 10px 10px, #8fc5f9 11px 11px, #8fc5f9 12px 12px, #8fc5f9 13px 13px, #8fc5f9 14px 14px, #8fc5f9 15px 15px, #8fc5f9 16px 16px, #8fc5f9 17px 17px, #8fc5f9 18px 18px, #8fc5f9 19px 19px, #8fc5f9 20px 20px, #8fc5f9 21px 21px, #8fc5f9 22px 22px, #8fc5f9 23px 23px, #8fc5f9 24px 24px, #8fc5f9 25px 25px, #8fc5f9 26px 26px, #8fc5f9 27px 27px, #8fc5f9 28px 28px, #8fc5f9 29px 29px, #8fc5f9 30px 30px, #8fc5f9 31px 31px, #8fc5f9 32px 32px, #8fc5f9 33px 33px, #8fc5f9 34px 34px, #8fc5f9 35px 35px, #8fc5f9 36px 36px, #8fc5f9 37px 37px, #8fc5f9 38px 38px, #8fc5f9 39px 39px, #8fc5f9 40px 40px, #8fc5f9 41px 41px, #8fc5f9 42px 42px, #8fc5f9 43px 43px, #8fc5f9 44px 44px, #8fc5f9 45px 45px, #8fc5f9 46px 46px, #8fc5f9 47px 47px, #8fc5f9 48px 48px, #8fc5f9 49px 49px, #8fc5f9 50px 50px, #8fc5f9 51px 51px, #8fc5f9 52px 52px, #8fc5f9 53px 53px, #8fc5f9 54px 54px, #8fc5f9 55px 55px, #8fc5f9 56px 56px, #8fc5f9 57px 57px, #8fc5f9 58px 58px, #8fc5f9 59px 59px, #8fc5f9 60px 60px, #8fc5f9 61px 61px, #8fc5f9 62px 62px, #8fc5f9 63px 63px, #8fc5f9 64px 64px, #8fc5f9 65px 65px, #8fc5f9 66px 66px, #8fc5f9 67px 67px, #8fc5f9 68px 68px, #8fc5f9 69px 69px, #8fc5f9 70px 70px, #8fc5f9 71px 71px, #8fc5f9 72px 72px, #8fc5f9 73px 73px, #8fc5f9 74px 74px, #8fc5f9 75px 75px, #8fc5f9 76px 76px, #8fc5f9 77px 77px, #8fc5f9 78px 78px, #8fc5f9 79px 79px, #8fc5f9 80px 80px, #8fc5f9 81px 81px, #8fc5f9 82px 82px, #8fc5f9 83px 83px, #8fc5f9 84px 84px, #8fc5f9 85px 85px, #8fc5f9 86px 86px, #8fc5f9 87px 87px, #8fc5f9 88px 88px, #8fc5f9 89px 89px, #8fc5f9 90px 90px, #8fc5f9 91px 91px, #8fc5f9 92px 92px, #8fc5f9 93px 93px, #8fc5f9 94px 94px, #8fc5f9 95px 95px, #8fc5f9 96px 96px, #8fc5f9 97px 97px, #8fc5f9 98px 98px, #8fc5f9 99px 99px, #8fc5f9 100px 100px, #8fc5f9 0px 0px;
+    opacity: 0;
+  }
+}
+@keyframes intro-sup {
+  0% {
+    visibility: visible;
+    font-size: 1em;
+    transform: translateX(0%);
+    text-shadow: none;
+  }
+  50% {
+    font-size: 8em;
+    margin-right: 0px;
+    transform: translateX(0%);
+    text-shadow: none;
+  }
+  90% {
+    transform: translateX(-4em);
+    transition: all 250ms ease-out;
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-8em);
+    text-shadow: #8fc5f9 1px 1px, #8fc5f9 2px 2px, #8fc5f9 3px 3px, #8fc5f9 4px 4px, #8fc5f9 5px 5px, #8fc5f9 6px 6px, #8fc5f9 7px 7px, #8fc5f9 8px 8px, #8fc5f9 9px 9px, #8fc5f9 10px 10px, #8fc5f9 11px 11px, #8fc5f9 12px 12px, #8fc5f9 13px 13px, #8fc5f9 14px 14px, #8fc5f9 15px 15px, #8fc5f9 16px 16px, #8fc5f9 17px 17px, #8fc5f9 18px 18px, #8fc5f9 19px 19px, #8fc5f9 20px 20px, #8fc5f9 21px 21px, #8fc5f9 22px 22px, #8fc5f9 23px 23px, #8fc5f9 24px 24px, #8fc5f9 25px 25px, #8fc5f9 26px 26px, #8fc5f9 27px 27px, #8fc5f9 28px 28px, #8fc5f9 29px 29px, #8fc5f9 30px 30px, #8fc5f9 31px 31px, #8fc5f9 32px 32px, #8fc5f9 33px 33px, #8fc5f9 34px 34px, #8fc5f9 35px 35px, #8fc5f9 36px 36px, #8fc5f9 37px 37px, #8fc5f9 38px 38px, #8fc5f9 39px 39px, #8fc5f9 40px 40px, #8fc5f9 41px 41px, #8fc5f9 42px 42px, #8fc5f9 43px 43px, #8fc5f9 44px 44px, #8fc5f9 45px 45px, #8fc5f9 46px 46px, #8fc5f9 47px 47px, #8fc5f9 48px 48px, #8fc5f9 49px 49px, #8fc5f9 50px 50px, #8fc5f9 51px 51px, #8fc5f9 52px 52px, #8fc5f9 53px 53px, #8fc5f9 54px 54px, #8fc5f9 55px 55px, #8fc5f9 56px 56px, #8fc5f9 57px 57px, #8fc5f9 58px 58px, #8fc5f9 59px 59px, #8fc5f9 60px 60px, #8fc5f9 61px 61px, #8fc5f9 62px 62px, #8fc5f9 63px 63px, #8fc5f9 64px 64px, #8fc5f9 65px 65px, #8fc5f9 66px 66px, #8fc5f9 67px 67px, #8fc5f9 68px 68px, #8fc5f9 69px 69px, #8fc5f9 70px 70px, #8fc5f9 71px 71px, #8fc5f9 72px 72px, #8fc5f9 73px 73px, #8fc5f9 74px 74px, #8fc5f9 75px 75px, #8fc5f9 76px 76px, #8fc5f9 77px 77px, #8fc5f9 78px 78px, #8fc5f9 79px 79px, #8fc5f9 80px 80px, #8fc5f9 81px 81px, #8fc5f9 82px 82px, #8fc5f9 83px 83px, #8fc5f9 84px 84px, #8fc5f9 85px 85px, #8fc5f9 86px 86px, #8fc5f9 87px 87px, #8fc5f9 88px 88px, #8fc5f9 89px 89px, #8fc5f9 90px 90px, #8fc5f9 91px 91px, #8fc5f9 92px 92px, #8fc5f9 93px 93px, #8fc5f9 94px 94px, #8fc5f9 95px 95px, #8fc5f9 96px 96px, #8fc5f9 97px 97px, #8fc5f9 98px 98px, #8fc5f9 99px 99px, #8fc5f9 100px 100px, #8fc5f9 0px 0px;
+    opacity: 0;
+  }
+}
+@keyframes planet {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.1);
+  }
+}

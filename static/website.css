@@ -408,6 +408,7 @@ pbutton:active {
 @import url('https://fonts.googleapis.com/css?family=Rubik:700&display=swap');
  * {
 	 box-sizing: border-box;
+   font-family: lm_light, sans-serif;
 }
  *::before, *::after {
 	 box-sizing: border-box;
