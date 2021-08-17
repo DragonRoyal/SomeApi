@@ -30,7 +30,7 @@ async def cooluser():
 @app.route("/user/page")
 async def userpage():
   return await render_template("userscreen.html")
- 
+
 @app.route("/theme")
 async def themes():
   return await render_template("theme.html")
@@ -57,7 +57,7 @@ async def discord_url():
 
   url = "https://discord.com/api/users/@me"
   access_token = Oauth.get_access_token(str(quart.request.args['code']))
-  
+
   headers = {"Authorization": f"Bearer {access_token}"}
   gen_key=secrets.token_hex(20)
   user_object = requests.get(url = url, headers = headers).json()
@@ -73,7 +73,7 @@ async def discord_url():
         userid_exists=1
         return "Only 1 api key per User, You already have one"
         #break
-        
+
   if userid_exists==0:
     with open('apikey.csv', mode='a') as keyfile:
       key_writer = csv.writer(keyfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -83,8 +83,9 @@ async def discord_url():
 
 
 
+
 @app.route('/json/dogs', methods=['GET'])
-async def Dfact():     
+async def Dfact():
     with open("api-things/dfact.json") as json_file:
       data = json.load(json_file)
       Rdata=random.choice(data)
@@ -92,7 +93,7 @@ async def Dfact():
 
 
 @app.route('/json/quote', methods=['GET'])
-async def qoutes():     
+async def qoutes():
     with open("api-things/qoutes.json") as json_file:
       data = json.load(json_file)
       Rdata=random.choice(data["quotes"])
@@ -127,7 +128,25 @@ async def wanted():
         wanted.paste(pfp,(120,212))
         wanted.save("trash_photo/wanted2.jpg")
         return await send_file("trash_photo/wanted2.jpg", mimetype='image/jpg')
- 
+
+
+    else:
+      return await page_not_found(404)
+
+@app.route('/leaderboard',methods=['GET'])
+async def leaderboard():
+    if 'avatar' in quart.request.args:
+        Lavatar = str(quart.request.args['avatar'])
+        response = requests.get(Lavatar)
+        image = Image.open(BytesIO(response.content))
+        image.save("avatar.png")
+        pfp=Image.open("avatar.png")
+        pfp=pfp.resize((177,177))
+        wanted=Image.open("image/wanted.jpg")
+        wanted.paste(pfp,(120,212))
+        wanted.save("trash_photo/wanted2.jpg")
+        return await send_file("trash_photo/wanted2.jpg", mimetype='image/jpg')
+
 
     else:
       return await page_not_found(404)
@@ -146,7 +165,7 @@ async def trash():
         trash.paste(pfp,(140,145),pfp.convert("RGBA"))
         trash.save("trash_photo/trashpic.png")
         return await send_file("trash_photo/trashpic.png", mimetype='image/png')
- 
+
 
       else:
         return await page_not_found(404)
@@ -164,7 +183,7 @@ async def hiter():
         trash.paste(pfp,(29,32),pfp.convert("RGBA"))
         trash.save("trash_photo/hitlerpic.png")
         return await send_file("trash_photo/hitlerpic.png", mimetype='image/png')
- 
+
 
       else:
         return await page_not_found(404)
@@ -205,10 +224,10 @@ async def youtube():
             youtube.paste(image,(24,29),image)
             youtube.save("trash_photo/youtube.png")
             return await send_file("trash_photo/youtube.png", mimetype='image/png')
-            
 
 
- 
+
+
 
     else:
       return await page_not_found(404)
@@ -244,7 +263,7 @@ async def alert():
         draw.text((55,566),text,(0,0,0),font=font)
         alert.save("trash_photo/alert.png")
         return await send_file("trash_photo/alert.png", mimetype='image/png')
- 
+
 
     else:
       return await page_not_found(404)
@@ -258,7 +277,7 @@ async def billy():
         draw.text((26,291),text,(0,0,0),font=font)
         alert.save("trash_photo/billy2.png")
         return await send_file("trash_photo/billy2.png", mimetype='image/png')
- 
+
 
     else:
       return await page_not_found(404)
@@ -276,7 +295,7 @@ async def god_temp():
         draw.text((93,350),text,(0,0,0),font=font)
         alert.save("trash_photo/god_temp.png")
         return await send_file("trash_photo/god_temp.png", mimetype='image/png')
- 
+
 
     else:
       return await page_not_found(404)
@@ -293,7 +312,7 @@ async def biden():
         draw.text((30,110),text,(0,0,0),font=font)
         alert.save("trash_photo/biden.png")
         return await send_file("trash_photo/biden.png", mimetype='image/png')
- 
+
 
     else:
       return await page_not_found(404)
@@ -318,9 +337,9 @@ async def chatbot():
           return quart.jsonify(text=data["cnt"])
   else:
     return "Invalid Api Key! Go get one!"
-            
-          
-        
+
+
+
 
 
 
@@ -328,9 +347,9 @@ async def chatbot():
 async def pacman():
     if 'text' in quart.request.args:
         text = str(quart.request.args['text'])
-        print(len(text),text[10],text[0])
+
         lines = textwrap.wrap(text, width=10)
-        
+
 
         image=Image.open("image/blankimage.png")
         width, height = image.size
@@ -342,7 +361,7 @@ async def pacman():
         for line in lines:
           width, height = font.getsize(line)
           print(width,height,y_text)
-          
+
           print(line)
           draw.text(((992 - width) / 2, y_text), line,(0,0,0), font=font)
           #draw.text((26,265),line,(0,0,0),font=font)
@@ -350,7 +369,7 @@ async def pacman():
         #draw.text((26,265),text,(0,0,0),font=font)
         image.save("trash_photo/pacmantext.png")
         return await send_file("trash_photo/pacmantext.png", mimetype='image/png')
- 
+
 
     else:
       return await page_not_found(404)
@@ -362,11 +381,11 @@ async def mocktext():
     if 'text' in quart.request.args:
         text = str(quart.request.args['text'])
 
-        
-        
+
+
     else:
         return await page_not_found(404)
-        
+
     return quart.jsonify(text=spongemocklower(text))
 
 
@@ -376,10 +395,10 @@ async def wasted():
         Lavatar = str(quart.request.args['avatar'])
         response = requests.get(Lavatar)
         image = Image.open(BytesIO(response.content))
-        
+
         pfp=ImageOps.grayscale(image).convert("RGBA")
         wasted=Image.open("image/wasted.png")
-       
+
         wasted=wasted.resize((320,400))
         pfp=pfp.resize((248,248))
         #pfp=pfp.resize((512,512))
@@ -399,9 +418,9 @@ async def rainbow_overlay():
         #if image.tile[0][0] == "gif":
 
 
-        image=image.convert('RGB') 
+        image=image.convert('RGB')
         pixels=image.load()
-        width,height=image.size 
+        width,height=image.size
         print(image.format,image.mode,image.palette,image.info)
         for i in range(width):
           for j in range(height):
@@ -409,17 +428,17 @@ async def rainbow_overlay():
             k=int(j/n)
             pix=pixels[i,j]
             #pix=image.getpixel((i,j))
-            
-            
+
+
             r=pix[0]
             g=pix[1]
             b=pix[2]
-            
+
             if k%3==1:
               nr=r
               ng=0.1*g
               nb=0.1*b
-            elif k%3==2:              
+            elif k%3==2:
               nr=0.1*r
               ng=g
               nb=0.1*b
@@ -429,8 +448,8 @@ async def rainbow_overlay():
               nb=b
             pixels[i,j]=(int(nr),int(ng),int(nb))
         image.save("trash_photo/profile.png")
-            
-        
+
+
         return await send_file("trash_photo/profile.png", mimetype='image/png')
         #pfp = pfp.open('profile.png')
     else:
@@ -447,7 +466,7 @@ async def send_email(reciver,apikey):
   smtp_server = "smtp.gmail.com"
   sender_email = "aarav.singhania50@gmail.com"  # Enter your address
   receiver_email = reciver  # Enter receiver address
-  
+
   message = f"""\
   Subject: SomeApi Key
 
@@ -478,7 +497,11 @@ async def creduts():
 
 
 
+@app.route("/dooltest")
+async def iscool():
+    resp = await make_response("hello") #here you could use make_response(render_template(...)) too
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
- 
 
-app.run(host="0.0.0.0",port=80,debug=True)
+app.run(host="0.0.0.0",port=80,)
