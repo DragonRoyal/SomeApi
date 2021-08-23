@@ -4,7 +4,7 @@ import csv
 import quart
 import textwrap
 from random import *
-import smtplib,ssl
+import smtplib,ssl,subprocess
 import requests
 import secrets
 import json
@@ -43,6 +43,7 @@ async def otters_img():
   return await send_file(f"otter/{seal}", mimetype='image/jpg')
 @app.route("/image/dog",)
 async def dog_img():
+  
   imgList = os.listdir("dogs")
   seal = random.choice(imgList)
   return await send_file(f"dogs/{seal}", mimetype='image/png')
@@ -51,8 +52,44 @@ async def dog_img():
 @app.route("/register")
 async def api_key_register():
   pass
+
+def WebCounter(page):
+       
+        with open('test6.csv', mode='w') as keyfile:
+            test_writer = csv.writer(keyfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+        
+            with open('stats.csv', mode='r') as keyfile:
+                csv_reader = csv.reader(keyfile, delimiter=',')
+
+                match=0
+                # if os.path.getsize("bw.csv") == 0:
+                #   test_writer.writerow([ctx.guild.id,"off"])
+                # else:
+                for row in csv_reader:
+                    if row[0] == page:
+                        ctr=sum(map(int,row[1]),1)
+                        test_writer.writerow([row[0],ctr])
+                        match=1
+              
+                    else:
+                      
+                      test_writer.writerow([row[0],row[1]])
+                    #test_writer.writerow(["me",101])
+
+        if match==0:
+           
+            with open('test6.csv', mode='a') as keyfile:
+                test_reader = csv.writer(keyfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                test_reader.writerow([page, 1])
+
+        os.rename('test6.csv','stats.csv')
+ 
+
 @app.route("/register/discord",methods=['get'])
 async def discord_url():
+  
+  
   discord_url_link='https://discord.com/api/oauth2/authorize?client_id=873068029024534538&redirect_uri=https%3A%2F%2Fsomeapi.xyz%2Fregister%2Fdiscord&response_type=code&scope=email%20identify%20guilds'
 
   url = "https://discord.com/api/users/@me"
@@ -94,15 +131,21 @@ async def Dfact():
 
 @app.route('/json/quote', methods=['GET'])
 async def qoutes():
+
+    WebCounter('quote')
     with open("api-things/qoutes.json") as json_file:
       data = json.load(json_file)
       Rdata=random.choice(data["quotes"])
 
     return quart.jsonify(Rdata)
+
 @app.route('/greyscale',methods=['GET'])
 async def grey_scale():
   try:
+    
     if 'avatar' in quart.request.args:
+
+        WebCounter('greyscale')
         Lavatar = str(quart.request.args['avatar'])
         response = requests.get(Lavatar)
         image = Image.open(BytesIO(response.content))
@@ -118,6 +161,7 @@ async def grey_scale():
 @app.route('/wanted',methods=['GET'])
 async def wanted():
     if 'avatar' in quart.request.args:
+        WebCounter('wanted')
         Lavatar = str(quart.request.args['avatar'])
         response = requests.get(Lavatar)
         image = Image.open(BytesIO(response.content))
@@ -132,7 +176,7 @@ async def wanted():
 
     else:
       return await page_not_found(404)
-
+ 
 @app.route('/leaderboard',methods=['GET'])
 async def leaderboard():
     if 'avatar' in quart.request.args:
@@ -155,6 +199,7 @@ async def leaderboard():
 @app.route('/trash',methods=['GET'])
 async def trash():
       if 'avatar' in quart.request.args:
+        WebCounter('trash')
         Lavatar = str(quart.request.args['avatar'])
         response = requests.get(Lavatar)
         image = Image.open(BytesIO(response.content))
@@ -173,6 +218,7 @@ async def trash():
 @app.route('/hitler',methods=['GET'])
 async def hiter():
       if 'avatar' in quart.request.args:
+        WebCounter('hitler')
         Lavatar = str(quart.request.args['avatar'])
         response = requests.get(Lavatar)
         image = Image.open(BytesIO(response.content))
@@ -193,6 +239,7 @@ async def hiter():
 @app.route('/invert',methods=['GET'])
 async def invert():
     if 'avatar' in quart.request.args:
+        WebCounter('invert')
         Lavatar = str(quart.request.args['avatar'])
         response = requests.get(Lavatar)
         image = Image.open(BytesIO(response.content))
@@ -234,6 +281,7 @@ async def youtube():
 @app.route('/slap',methods=['GET'])
 async def slap():
   if 'avatar1' in quart.request.args:
+        WebCounter('slap')
         Lavatar = str(quart.request.args['avatar1'])
         response=requests.get(Lavatar)
         image=Image.open(BytesIO(response.content))
@@ -255,7 +303,7 @@ async def slap():
 async def alert():
     if 'text' in quart.request.args:
         text = str(quart.request.args['text'])
-
+        WebCounter('alert')
 
         alert=Image.open("image/alert.jpg")
         font=ImageFont.truetype("image/arial.ttf",32)
@@ -270,6 +318,7 @@ async def alert():
 @app.route('/billy',methods=['GET'])
 async def billy():
     if 'text' in quart.request.args:
+        WebCounter('billy')
         text = str(quart.request.args['text'])
         alert=Image.open("image/billy.png")
         font=ImageFont.truetype("image/arial.ttf",20)
