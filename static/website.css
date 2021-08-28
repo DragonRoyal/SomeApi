@@ -4,11 +4,11 @@
   --MBP:#222c68;
   --INP:#4449d6;
   --scrollbar: #6b7edb;
-  --boxtext: white;
+  --boxtext: #101D42;
   --bodyC:#101D42;
 }
 #boxtext{
-  color: var(--boxtext)
+  color: var(--boxtext);
 }
 
 
@@ -124,7 +124,6 @@ flex: 2 0px;
 	top:1px;
 }
 body {
-
 	background-color: var(--bodyC);
   
 }

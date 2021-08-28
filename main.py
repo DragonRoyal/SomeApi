@@ -35,7 +35,6 @@ async def userpage():
 async def themes():
   return await render_template("theme.html")
 
-
 def WebCounter(page):
        
         with open('test6.csv', mode='w') as keyfile:
