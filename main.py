@@ -36,23 +36,6 @@ async def themes():
   return await render_template("theme.html")
 
 
-@app.route("/image/otter",)
-async def otters_img():
-  imgList = os.listdir("otter")
-  seal = random.choice(imgList)
-  return await send_file(f"otter/{seal}", mimetype='image/jpg')
-@app.route("/image/dog",)
-async def dog_img():
-  
-  imgList = os.listdir("dogs")
-  seal = random.choice(imgList)
-  return await send_file(f"dogs/{seal}", mimetype='image/png')
-
-
-@app.route("/register")
-async def api_key_register():
-  pass
-
 def WebCounter(page):
        
         with open('test6.csv', mode='w') as keyfile:
@@ -85,6 +68,23 @@ def WebCounter(page):
 
         os.rename('test6.csv','stats.csv')
  
+@app.route("/image/otter",)
+async def otters_img():
+  imgList = os.listdir("otter")
+  seal = random.choice(imgList)
+  return await send_file(f"otter/{seal}", mimetype='image/jpg')
+@app.route("/image/dog",)
+async def dog_img():
+  
+  imgList = os.listdir("dogs")
+  seal = random.choice(imgList)
+  return await send_file(f"dogs/{seal}", mimetype='image/png')
+
+
+@app.route("/register")
+async def api_key_register():
+  pass
+
 
 @app.route("/register/discord",methods=['get'])
 async def discord_url():
@@ -553,4 +553,4 @@ async def iscool():
     return resp
 
 
-app.run(host="0.0.0.0",port=80,)
+app.run(host="0.0.0.0",port=80)
