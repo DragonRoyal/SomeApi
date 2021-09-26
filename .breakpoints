@@ -16,12 +16,20 @@
         "index": 13082
       }
     ],
+    "main.py": [
+      {
+        "id": "46001f73-f9a5-4b20-ad12-998656eaba6c",
+        "line": 211,
+        "version": 13361,
+        "index": 6518
+      }
+    ],
     "static/script.js": [
       {
         "id": "24c64818-09cf-469b-ba03-9b5f59eeeb72",
-        "line": 409,
-        "version": 1091,
-        "index": 10245
+        "line": 410,
+        "version": 1226,
+        "index": 10315
       }
     ],
     "static/website.js": [

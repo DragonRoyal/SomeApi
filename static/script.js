@@ -6,11 +6,12 @@
 // getter
 //a=getComputedStyle(document.documentElement,null).getPropertyValue('--purpleH');
 //document.cookie="#1abc9c";
-if (document.cookie==null) {
-  document.cookie="#5557D9 #4449d6 #222c68 #4449d6 #6b7edb white #101D42; max-age=157680000; path=/";
+if (document.cookie.indexOf('cookie_name=')==-1) {
+  document.cookie="#5557D9 #4449d6 #222c68 #4449d6 #6b7edb white #101D42; max-age=157680000; path=/ ; Secure";
 }
 var str=document.cookie;
 color_cookie=str.split(" ");
+console.log(color_cookie[0]);
 //var purpleH_cookie = document.cookie;
 document.documentElement.style.setProperty('--purpleH',color_cookie[0]);
 document.documentElement.style.setProperty('--MHP',color_cookie[1]);
@@ -27,7 +28,7 @@ document.documentElement.style.setProperty('--bodyC',color_cookie[6]);
 //console.log(a);
 
 function themeFUNCP() {
-document.cookie="#5557D9 #4449d6 #222c68 #4449d6 #6b7edb white #101D42; max-age=157680000; path=/";
+document.cookie="#5557D9 #4449d6 #222c68 #4449d6 #6b7edb white #101D42; max-age=157680000; path=/ ; Secure";
 var str=document.cookie;
 color_cookie=str.split(" ");
 //var purpleH_cookie = document.cookie;

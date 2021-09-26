@@ -11,6 +11,9 @@
   color: var(--boxtext);
 }
 
+#lefoot {
+  size: 25px;
+}
 
 header p {
 padding: 50px;
@@ -74,11 +77,11 @@ column-gap: 1.25em;
 .b-footer {
 text-align: center;
 color: #999;
-padding-top: 50px;
+padding-top: 20px;
 }
 
 .l-footer p {
-padding-right: 20%;
+padding-right: 50%;
 color: #999;
 }   
 

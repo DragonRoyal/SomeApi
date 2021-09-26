@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+<head>
+    <title>Flappy Bird - PLAYCANVAS</title>
+
+    <meta name="description" content="Flappy&#39;s Back! Guide Flappy Bird through as many pipes as you can. Made with @playcanvas" />
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover' />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@playcanvas" />
+    <meta name="twitter:title" content="Flappy Bird" />
+    <meta name="twitter:description" content="Flappy&#39;s Back! Guide Flappy Bird through as many pipes as you can. Made with @playcanvas" />
+    <meta name="twitter:image" content="https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/cHyV1JTJ/thumbs/360.jpg" />
+    <meta name="twitter:domain" content="https://playcanv.as/p/2OlkUaxF/" />
+
+    <meta property="og:url" content="https://playcanv.as/p/2OlkUaxF/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Flappy Bird" />
+    <meta property="og:description" content="Flappy&#39;s Back! Guide Flappy Bird through as many pipes as you can. Made with @playcanvas">
+    <meta property="og:image" content="https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/cHyV1JTJ/thumbs/360.jpg" />
+    <meta property="og:site_name" content="PlayCanvas" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Flappy Bird">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="pc-url-home" content="https://playcanvas.com" />
+    <meta name="pc-onetrust-key" content="f91a844d-1f3a-40ee-8434-e5049aee38da" />
+
+    <link rel="icon" href="https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/cHyV1JTJ/thumbs/180.jpg">
+
+    <link rel="manifest" href="https://playcanv.as/p/2OlkUaxF//manifest.json">
+
+    <link rel="kik-icon" href="https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/cHyV1JTJ/thumbs/360.jpg">
+    <link rel="canonical" href="https://playcanv.as/p/2OlkUaxF/">
+
+    <link rel="apple-touch-icon" href="https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/cHyV1JTJ/thumbs/180.jpg" />
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+    </style>
+</head>
+<body>
+    <div id='container'>
+        <iframe id='frame'
+                src='/index/cHyV1JTJ'
+                webkitallowfullscreen='true'
+                mozallowfullscreen='true'
+                allow='autoplay'
+                allowfullscreen='true'
+                allowvr
+                scrolling='no'
+                frameBorder='0'>
+        </iframe>
+    </div>
+
+    <div id='footer'>
+        <a class='title' href='https://playcanvas.com/' target='_blank'>
+            <div class='img'></div>
+        </a>
+
+        <div class='views'><img class='icon' src='https://playcanvas.com/static-assets/images/eye.png' /><span id="viewcount">4592057</span></div>
+
+        <div id='fullscreen'></div>
+
+        <div id='social'>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN -->
+    <script type='text/javascript'>
+        var iframe = document.getElementById('frame');
+
+        // aggregate fullscreen to one method
+        iframe.requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
+        var button = document.getElementById('fullscreen');
+
+        // detect fullscreen is supported
+        if (iframe.requestFullScreen) {
+            button.classList.add('available');
+            button.addEventListener('click', function() {
+                iframe.requestFullScreen();
+
+                if (kik.enabled) {
+                    kik.browser.statusBar(false);
+                }
+            }, false);
+        }
+
+        // focus the iframe window so that keyboard works.
+        // (Chrome Fix: do this after the iframe has loaded
+        // otherwise gamepads don't work)
+        iframe.addEventListener('load', function () {
+            iframe.contentWindow.focus();
+        });
+
+    </script>
+
+        <script src="https://cdn.kik.com/kik/1.0.18/kik.js"></script>
+
+            <script>
+                kik.enabled = false;
+            </script>
+
+    <!-- FULL WINDOW -->
+    <script>
+        (function() {
+
+            // Needed as we will have edge cases for particular versions of iOS
+            // returns null if not iOS
+            var getIosVersion = function () {
+                if (/iP(hone|od|ad)/.test(navigator.platform)) {
+                    var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+                    var version = [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+                    return version;
+                }
+
+                return null;
+            }
+
+            var iosVersion = getIosVersion();
+            var iframe = document.getElementById('frame');
+            var footer = document.getElementById('footer');
+
+            var container = document.getElementById('container');
+            var lastWindowHeight = window.innerHeight;
+            var lastWindowWidth = window.innerWidth;
+            var windowSizeChangeIntervalHandler = null;
+
+            var resizeContainer = function () {
+                var width = window.innerWidth;
+
+                // Take into account of the footer
+                var height = window.innerHeight - footer.offsetHeight;
+
+                container.style.height = height + 'px';
+                container.style.width = width + 'px';
+
+                iframe.style.height = height + 'px';
+                iframe.style.width = width + 'px';
+
+                lastWindowHeight = window.innerHeight;
+                lastWindowWidth = window.innerWidth;
+
+                // Work around when in landscape to work on iOS 12 otherwise
+                // the content is under the URL bar at the top
+                if (iosVersion && iosVersion[0] <= 12) {
+                    window.scrollTo(0, 0);
+                }
+            };
+
+            var reflow = function () {
+                resizeContainer();
+                // Poll for size changes as the window inner height can change after the resize event for iOS
+                // Have one tab only, and rotate to portrait -> landscape -> portrait
+                if (windowSizeChangeIntervalHandler === null) {
+                    windowSizeChangeIntervalHandler = setInterval(function () {
+                        if (lastWindowHeight !== window.innerHeight || lastWindowWidth !== window.innerWidth) {
+                            resizeContainer();
+                        }
+                    }, 100);
+
+                    // Don't want to do this all the time so stop polling after some short time
+                    setTimeout(function() {
+                        if (!!windowSizeChangeIntervalHandler) {
+                            clearInterval(windowSizeChangeIntervalHandler);
+                            windowSizeChangeIntervalHandler = null;
+                        }
+                    }, 2000);
+                }
+            };
+
+            window.addEventListener('resize', reflow, false);
+            window.addEventListener('orientationchange', reflow, false);
+
+            iframe.addEventListener('load', function () {
+                reflow();
+            });
+        })();
+    </script>
+
+    <!-- SHARE -->
+    <script type='text/javascript'>
+
+        function addNetwork(network, _class) {
+            var div = document.createElement("div");
+            div.classList.add("share");
+            div.classList.add(_class);
+            div.setAttribute("data-network", network);
+
+            var el = document.getElementById("social");
+            el.appendChild(div);
+        }
+
+
+        if (kik.enabled) {
+            function kik_share() {
+                kik.send({
+                    title: 'Flappy Bird',
+                    text: 'Flappy&#39;s Back! Guide Flappy Bird through as many pipes as you can. Made with @playcanvas',
+                    pic: 'https://s3-eu-west-1.amazonaws.com/apps.playcanvas.com/cHyV1JTJ/thumbs/360.jpg',
+                    big: true,
+                });
+            };
+
+            addNetwork("kik", "kik");
+
+            var buttons = document.querySelectorAll("#social > .share.kik")
+            buttons[0].addEventListener('click', function () {
+                kik_share(this.getAttribute('data-network'));
+            });
+        } else {
+            addNetwork("facebook", "fb");
+            addNetwork("twitter", "tw");
+
+            var share = function(network) {
+                var title = document.title;
+                var href = window.location;
+                var text = document.head.querySelector('meta[name="description"]').getAttribute('content');
+                var tweet = text;
+                if (tweet.length > 110) {
+                    tweet = tweet.slice(0, 107) + '...';
+                }
+                var url = '';
+
+                switch(network) {
+                    case 'facebook':
+                        url = "https://facebook.com/sharer.php?u=" + encodeURIComponent(href) + "&t=" + encodeURIComponent(text);
+                        break;
+                    case 'twitter':
+                        url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(tweet) + "&url=" + encodeURIComponent(href)
+                        break;
+                }
+
+                var left = (screen.width / 2) - (640 / 2);
+                var top = (screen.height / 2) - (380 / 2);
+
+                var popup = window.open(url, 'name', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + 640 + ', height=' + 380 +', top=' + top + ', left=' + left);
+                if (window.focus && popup) {
+                    popup.focus();
+                }
+            }
+
+            var shareButtons = document.querySelectorAll('#social > .share');
+            for(var i =0; i < shareButtons.length; i++) {
+                shareButtons[i].addEventListener('click', function() {
+                    share(this.getAttribute('data-network'));
+                }, false);
+            }
+        }
+    </script>
+
+
+    <!-- FORMAT VIEWS -->
+    <script>
+    var views = document.querySelector("#viewcount");
+    if (views) {
+        var num = parseInt(views.textContent, 10);
+        views.textContent = num.toLocaleString();
+    }
+    </script>
+
+<!-- Google Analytics -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('set', 'developer_id.dNzMyY2', true); // OneTrust developer id
+    gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 1000
+    });
+
+    gtag('js', new Date());
+
+    if (window.navigator.standalone) {
+        gtag('set', {
+          'dimension1': true
+        });
+    }
+
+    gtag('config', "UA-23605814-1");
+
+    if (!window._optanonCallbacks) {
+        window._optanonCallbacks = [];
+    }
+
+    _optanonCallbacks.push(function () {
+        // if consent given for cookies then
+        // update gtag consent
+        var analytics = (OnetrustActiveGroups.indexOf('C0002') != -1);
+        var ads = (OnetrustActiveGroups.indexOf('C0004') != -1);
+        if (analytics || ads) {
+            gtag('consent', 'update', {
+                'analytics_storage': analytics ? 'granted' : 'denied',
+                'ad_storage': ads ? 'granted' : 'denied'
+            });
+        }
+    });
+
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23605814-1"></script>
+<!-- End Google Analytics -->
+
+
+</body>
+</html>
