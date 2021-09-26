@@ -6,3 +6,6 @@ Project is under GNU General Public License, feel free to take code parts but if
 basically you can copy code but dont copy the code and make your own api without making it open source, also credit me!
 
 Feel free to make it better!
+
+
+also can anyone pls make a better MD? Im bad at md 🙂
